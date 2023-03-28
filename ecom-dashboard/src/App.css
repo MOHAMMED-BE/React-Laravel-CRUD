@@ -1,0 +1,22 @@
+:root {
+  --shadow: 0 0.1rem 1.5rem 0 rgb(22 39 86 / 10%);
+  --shadow-2 : rgb(0 17 51 / 7%) 0px 3px 15px;
+  --radius: 5px;
+  --font-family: "Varela Round", sans-serif !important;
+}
+
+@font-face {
+  font-family: 'Varela Round';
+  src: url(../src/assets/fonts/VarelaRound-Regular.ttf);
+}
+
+.App {
+  font-family: var(--font-family);
+}
+
+.image {
+  width: 7rem;
+  height: 5rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
