@@ -9,16 +9,15 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [oldimage, setOldImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const nameRef = useRef(null);
   const descriptionRef = useRef(null);
   const priceRef = useRef(null);
-  const imageRef = useRef(null);
+  const imageRef = useRef();
+  const newImageRef = useRef(null);
   const { addToast } = useToasts();
   const navigate = useNavigate();
-
-  // Object.keys();
-  
 
   const fetchData = useCallback(async () => {
     const response = await axios.get(`http://127.0.0.1:8000/api/getproduct/${id}`);
@@ -26,6 +25,7 @@ const UpdateProduct = () => {
     setPrice(response.data.product.price);
     setDescription(response.data.product.description);
     setImage(response.data.product.file_path);
+    setOldImage(response.data.product.file_path);
   }, [id]);
 
 
@@ -33,15 +33,22 @@ const UpdateProduct = () => {
     fetchData();
   }, [fetchData]);
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImage(event.target.files[0]);
-      setImagePreview(URL.createObjectURL(event.target.files[0]));
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const removeImage = async (e) => {
+    e.preventDefault();
+    imageRef.current.value = null;
+    setImagePreview(null);
+    setImage(oldimage);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('name', name);
     formData.append('price', price);
@@ -105,8 +112,8 @@ const UpdateProduct = () => {
                   {!imagePreview && <img className='image mt-3' src={'http://127.0.0.1:8000/' + image} key={id} alt={name} />}
                   {imagePreview ?
                     <>
-                      <img src={imagePreview} alt="preview" name='preview' className='image mt-3' />
-                      <button type="submit" className="btn btn-outline-danger ms-2 mt-3">Remove</button>
+                      <img src={imagePreview} alt="preview" name='preview' ref={newImageRef} className='image mt-3' />
+                      <button type="submit" onClick={removeImage} className="btn btn-outline-danger ms-2 mt-3">Remove</button>
                     </>
                     :
                     <></>

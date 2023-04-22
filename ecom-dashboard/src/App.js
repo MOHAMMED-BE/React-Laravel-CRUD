@@ -7,7 +7,6 @@ import AddProduct from './AddProduct';
 import UpdateProduct from './UpdateProduct';
 import ProductList from './ProductList';
 import SearchProduct from './SearchProduct'
-import NewLogin from './NewLogin';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
 
@@ -53,8 +52,6 @@ function App() {
               <Protected Cmp={ProductList} />
             </ToastProvider>
           } />
-
-          <Route path='/newlogin' element={<NewLogin />}></Route>
 
         </Routes>
       </Router>
