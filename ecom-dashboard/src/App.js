@@ -13,7 +13,7 @@ import { ToastProvider } from 'react-toast-notifications';
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/React-Laravel-CRUD">
         <Header />
         <Routes>
 
