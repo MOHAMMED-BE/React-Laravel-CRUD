@@ -12,11 +12,7 @@ const ProductList = () => {
 
 
     const fetchData = async () => {
-        const useLocalApi = true; // set this to false to use the live API
-
-        const apiUrl = useLocalApi ? 'http://127.0.0.1:8000/api/showproduct' : 'https://ecomcrud-react-laravel.000webhostapp.com/api/showproduct';
-
-        const response = await axios.get(apiUrl);
+        const response = await axios.get('https://ecomcrud-react-laravel.000webhostapp.com/api/showproduct');
         setData(response.data.product);
     }
 
@@ -37,7 +33,7 @@ const ProductList = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`http://127.0.0.1:8000/api/delete/${id}`);
+                await axios.delete(`https://ecomcrud-react-laravel.000webhostapp.com/api/delete/${id}`);
                 fetchData();
                 addToast('Product Deleted Successfully', { appearance: 'success' });
             }
@@ -67,7 +63,7 @@ const ProductList = () => {
                     {data.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td><img className='image' src={'http://127.0.0.1:8000/' + item.file_path} alt={item.name} /></td>
+                                <td><img className='image' src={'https://ecomcrud-react-laravel.000webhostapp.com/' + item.file_path} alt={item.name} /></td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
