@@ -27,7 +27,7 @@ const AddProduct = () => {
     data.append('image', image);
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/addproduct', data);
+      await axios.post('https://ecomcrud-react-laravel.000webhostapp.com/api/addproduct', data);
       setName('');
       setDescription('');
       setPrice('');
