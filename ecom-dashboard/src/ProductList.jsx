@@ -12,7 +12,11 @@ const ProductList = () => {
 
 
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/showproduct');
+        const useLocalApi = true; // set this to false to use the live API
+
+        const apiUrl = useLocalApi ? 'http://127.0.0.1:8000/api/showproduct' : 'https://ecomcrud-react-laravel.000webhostapp.com/api/showproduct';
+
+        const response = await axios.get(apiUrl);
         setData(response.data.product);
     }
 

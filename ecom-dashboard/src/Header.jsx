@@ -26,9 +26,6 @@ const Header = () => {
                                 <Link to="/search" className="nav-link">
                                     Search
                                 </Link>
-                                <Link to="/newlogin" className="nav-link">
-                                    new Login
-                                </Link>
                             </>
                         ) : (
                             <>
