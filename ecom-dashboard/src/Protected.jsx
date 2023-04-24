@@ -7,7 +7,7 @@ const Protected = (props) => {
 
     useEffect(() => {
         if (!storedData) {
-            navigate('/login');
+            navigate('/');
         }
     }, [navigate, storedData]);
 
