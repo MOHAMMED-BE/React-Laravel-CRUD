@@ -7,7 +7,7 @@ const SearchProduct = () => {
   const [inputValue, setinputValue] = useState(false);
 
   const search = async (key) => {
-    const response = await axios.get(`https://ecomcrud-react-laravel.000webhostapp.com/api/search/${key}`);
+    const response = await axios.get(`http://127.0.0.1:8000/api/search/${key}`);
     setData(response.data.product);
     setinputValue(true);
 
@@ -35,7 +35,7 @@ const SearchProduct = () => {
                 {data.map((item) => {
                   return (
                     <tr key={item.id}>
-                      <td><img className='image' src={'https://ecomcrud-react-laravel.000webhostapp.com/' + item.file_path} alt={item.name} /></td>
+                      <td><img className='image' src={'http://127.0.0.1:8000/' + item.file_path} alt={item.name} /></td>
                       <td>{item.name}</td>
                       <td>{item.price}</td>
                       <td>{item.description}</td>
