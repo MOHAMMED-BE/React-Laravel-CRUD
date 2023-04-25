@@ -11,6 +11,25 @@ class UserController extends Controller
 {
     function Register(Request $request)
     {
+         if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $user = User::firstOrCreate(
             ['email' => $request->email],
             ['name' => $request->name, 'password' => Hash::make($request->password)]
@@ -23,6 +42,25 @@ class UserController extends Controller
 
     function Login(Request $request)
     {
+         if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $validatedData = $request->validate([
             'email' => 'required|email',
             'password' => 'required',

@@ -10,6 +10,25 @@ class ProductController extends Controller
 {
     public function AddProduct(Request $request)
     {
+        if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $request->validate([
             'image' => 'required|image|mimes:png,jpg,jpeg|max:9999'
         ]);
@@ -30,12 +49,50 @@ class ProductController extends Controller
 
     public function ShowProducts()
     {
+        if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $product = Product::orderBy('created_at', 'desc')->get();
         return response(['product' => $product]);
     }
 
     public function DeleteProduct($id)
     {
+        if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $product = Product::findOrFail($id);
         $image = $product->file_path;
         unlink($image);
@@ -50,6 +107,25 @@ class ProductController extends Controller
 
     function GetProduct($id)
     {
+        if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $product = Product::findOrFail($id);
 
         return response(['product' => $product]);
@@ -58,6 +134,25 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request, $id)
     {
+        if (env('APP_ENV') === 'local') {
+            $dbHost = 'localhost';
+            $dbName = 'react-laravel';
+            $dbUsername = 'root';
+            $dbPassword = '';
+        }
+        // JAWS_DB configuration
+        else {
+            $url = parse_url(getenv("JAWSDB_URL"));
+            $dbHost = 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+            $dbName   = 'qyfwemmp6q4rg61z';
+            $dbUsername = 'z6gnyc6fzp5kw78s';
+            $dbPassword = 'lywpj5okvosdlrp2';
+        }
+
+        // database connection
+        $db = new \PDO("mysql:host={$dbHost};dbname={$dbName}", $dbUsername, $dbPassword);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         $validator = Validator([
             'name' => 'required',
             'price' => 'required',

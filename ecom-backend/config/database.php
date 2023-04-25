@@ -63,6 +63,23 @@ return [
             ]) : [],
         ],
 
+         // ================ JAWS_DB
+
+         'mysql_jaws' => [
+            'driver' => 'mysql',
+            'host' => env('JAWSDB_HOST', 'l6glqt8gsx37y4hs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'),
+            'port' => env('JAWSDB_PORT', '3306'),
+            'database' => env('JAWSDB_DATABASE', 'qyfwemmp6q4rg61z'),
+            'username' => env('JAWSDB_USERNAME', 'z6gnyc6fzp5kw78s'),
+            'password' => env('JAWSDB_PASSWORD', 'lywpj5okvosdlrp2'),
+            'unix_socket' => env('JAWSDB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
