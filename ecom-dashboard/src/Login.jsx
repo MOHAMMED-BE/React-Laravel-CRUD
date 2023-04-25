@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', item);
+      const response = await axios.post('https://crud-reactlaravel.herokuapp.com/api/login', item);
 
       if (response.status === 200) {
         const data = response.data;

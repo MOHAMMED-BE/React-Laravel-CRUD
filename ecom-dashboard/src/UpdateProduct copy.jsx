@@ -19,7 +19,7 @@ const UpdateProduct = () => {
   };
 
   const fetchData = useCallback(async () => {
-    const response = await axios.get(`http://127.0.0.1:8000/api/getproduct/${id}`);
+    const response = await axios.get(`https://crud-reactlaravel.herokuapp.com/api/getproduct/${id}`);
     setName(response.data.product.name);
     setImage(response.data.product.file_path);
   }, [id]);
@@ -37,7 +37,7 @@ const UpdateProduct = () => {
     formData.append('image', image);
 
     try {
-      await axios.post(`http://127.0.0.1:8000/api/update/${id}`, formData);
+      await axios.post(`https://crud-reactlaravel.herokuapp.com/api/update/${id}`, formData);
       navigate('/');
       addToast('Product updated Successfully', { appearance: 'success' });
     } catch (error) {
@@ -64,7 +64,7 @@ const UpdateProduct = () => {
                   />
                 </div>
                 <div className='form-group'>
-                  {!imagePreview && <img className='image mt-3' src={'http://127.0.0.1:8000/' + image} key={id} alt={name} />}
+                  {!imagePreview && <img className='image mt-3' src={'https://crud-reactlaravel.herokuapp.com/' + image} key={id} alt={name} />}
                   {imagePreview ?
                     <>
                       <img src={imagePreview} alt="preview" name='preview' className='image mt-3' />

@@ -66,7 +66,7 @@ const Register = () => {
 
     try {
       const item = { name, email, password }
-      const response = await axios.post("http://127.0.0.1:8000/api/register", item);
+      const response = await axios.post("https://crud-reactlaravel.herokuapp.com/api/register", item);
 
       const data = response.data;
       localStorage.setItem('user-info', JSON.stringify(data));

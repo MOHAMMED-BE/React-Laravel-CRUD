@@ -12,7 +12,7 @@ const ProductList = () => {
 
 
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/showproduct');
+        const response = await axios.get('https://crud-reactlaravel.herokuapp.com/api/showproduct');
         setData(response.data.product);
     }
 
@@ -33,7 +33,7 @@ const ProductList = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`http://127.0.0.1:8000/api/delete/${id}`);
+                await axios.delete(`https://crud-reactlaravel.herokuapp.com/api/delete/${id}`);
                 fetchData();
                 addToast('Product Deleted Successfully', { appearance: 'success' });
             }
@@ -63,7 +63,7 @@ const ProductList = () => {
                     {data.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td><img className='image' src={'http://127.0.0.1:8000/' + item.file_path} alt={item.name} /></td>
+                                <td><img className='image' src={'https://crud-reactlaravel.herokuapp.com/' + item.file_path} alt={item.name} /></td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
