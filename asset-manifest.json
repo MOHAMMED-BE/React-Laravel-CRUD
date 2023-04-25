@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/React-Laravel-CRUD/static/css/main.d788490c.css",
-    "main.js": "/React-Laravel-CRUD/static/js/main.64bcc785.js",
+    "main.js": "/React-Laravel-CRUD/static/js/main.2ff94a9b.js",
     "static/js/787.a44fa967.chunk.js": "/React-Laravel-CRUD/static/js/787.a44fa967.chunk.js",
     "static/media/VarelaRound-Regular.ttf": "/React-Laravel-CRUD/static/media/VarelaRound-Regular.3b7ffe17ffd5b4e3c72f.ttf",
     "index.html": "/React-Laravel-CRUD/index.html",
     "main.d788490c.css.map": "/React-Laravel-CRUD/static/css/main.d788490c.css.map",
-    "main.64bcc785.js.map": "/React-Laravel-CRUD/static/js/main.64bcc785.js.map",
+    "main.2ff94a9b.js.map": "/React-Laravel-CRUD/static/js/main.2ff94a9b.js.map",
     "787.a44fa967.chunk.js.map": "/React-Laravel-CRUD/static/js/787.a44fa967.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d788490c.css",
-    "static/js/main.64bcc785.js"
+    "static/js/main.2ff94a9b.js"
   ]
 }
