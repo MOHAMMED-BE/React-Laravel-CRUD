@@ -58,25 +58,6 @@ const Login = (props) => {
     handleSubmit,
   } = formik;
 
-  // const axiosLogin = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post(`${props.baseUrl}/api/login`, item);
-
-  //     if (response.status === 200) {
-  //       const data = response.data;
-  //       localStorage.setItem('user-info', JSON.stringify(data));
-  //       navigate('/');
-  //       addToast('Login Successfully', { appearance: 'success' });
-  //     } else {
-  //       addToast('Email or password is incorrect', { appearance: 'warning' });
-  //     }
-  //   } catch (error) {
-  //     addToast('An error occurred while logging in. Please try again later.', { appearance: 'error' });
-  //   }
-  // };
-
 
   return (
     <>

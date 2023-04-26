@@ -32,7 +32,7 @@ const SearchProduct = (props) => {
                 {data.map((item) => {
                   return (
                     <tr key={item.id}>
-                      <td><img className='image' src={'http://127.0.0.1:8000/' + item.file_path} alt={item.name} /></td>
+                      <td><img className='image' src={`${props.baseUrl}/${item.file_path}`} alt={item.name} /></td>
                       <td>{item.name}</td>
                       <td>{item.price}</td>
                       <td>{item.description}</td>
@@ -46,7 +46,7 @@ const SearchProduct = (props) => {
 
           <>
             {inputValue && <h3 className='text-center text-danger'>No data found!</h3>}
-          
+
           </>
       }
 

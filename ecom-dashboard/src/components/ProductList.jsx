@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
 const ProductList = (props) => {
     const [data, setData] = useState([]);
@@ -65,13 +66,13 @@ const ProductList = (props) => {
                             <tr key={item.id}>
                                 <td><img className='image' src={`${props.baseUrl}/${item.file_path}`} alt={item.name} /></td>
                                 <td>{item.name}</td>
-                                <td>{item.price}</td>
+                                <td>{item.price} DH</td>
                                 <td>{item.description}</td>
-                                <td>
+                                <td style={{ width: '10rem' }}>
                                     <Link to={`update/${item.id}`}>
-                                        <span className='btn btn-success me-1'>Update</span>
+                                        <span className='btn btn-outline-success me-1'><AiFillEdit className='icon-delete' /></span>
                                     </Link>
-                                    <span onClick={() => deleteProduct(item.id)} className='btn btn-outline-danger'>Delete</span>
+                                    <span onClick={() => deleteProduct(item.id)} className='btn btn-outline-danger'><AiFillDelete className='icon-delete' /></span>
                                 </td>
                             </tr>
                         );

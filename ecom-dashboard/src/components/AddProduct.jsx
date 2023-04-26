@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import axios from 'axios';
 import { useToasts } from 'react-toast-notifications';
 import * as yup from "yup";
 import { useFormik } from "formik";
 
 const AddProduct = (props) => {
-  // const [name, setName] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [price, setPrice] = useState('');
+  const imageRef = useRef();
   const [image, setImage] = useState('');
   const [imagePreview, setImagePreview] = useState(null)
   const { addToast } = useToasts();
@@ -40,12 +38,10 @@ const AddProduct = (props) => {
 
       try {
         await axios.post(`${props.baseUrl}/api/addproduct`, data);
-        // setName('');
-        // setDescription('');
-        // setPrice('');
         resetForm();
         setImage(null);
         setImagePreview(null);
+        imageRef.current.value = null;
         addToast('Product Saved Successfully', { appearance: 'success' });
 
       } catch (error) {
@@ -70,30 +66,6 @@ const AddProduct = (props) => {
       setImagePreview(URL.createObjectURL(event.target.files[0]));
     }
   }
-
-  // const saveProduct = async (e) => {
-  //   e.preventDefault();
-
-  //   const data = new FormData();
-  //   data.append('name', name);
-  //   data.append('description', description);
-  //   data.append('price', price);
-  //   data.append('image', image);
-
-  //   try {
-  //     await axios.post(`${props.baseUrl}/api/addproduct`, data);
-  //     setName('');
-  //     setDescription('');
-  //     setPrice('');
-  //     setImage(null);
-  //     setImagePreview(null);
-  //     addToast('Product Saved Successfully', { appearance: 'success' });
-
-  //   } catch (error) {
-  //     addToast('an error occurred while adding the product. Please try again later.', { appearance: 'error' });
-  //   }
-
-  // }
 
   return (
     <>
@@ -164,6 +136,7 @@ const AddProduct = (props) => {
                   name="image"
                   onChange={onImageChange}
                   className='form-control mb-2'
+                  ref={imageRef}
                   required
                 />
 

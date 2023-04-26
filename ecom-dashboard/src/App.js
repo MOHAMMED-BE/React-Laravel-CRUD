@@ -1,12 +1,12 @@
 import './App.css';
-import Header from './Header';
-import Login from './Login';
-import Register from './Register';
-import Protected from './Protected';
-import AddProduct from './AddProduct';
-import UpdateProduct from './UpdateProduct';
-import ProductList from './ProductList';
-import SearchProduct from './SearchProduct'
+import Header from './components/Header';
+import Login from './components/Login';
+import Register from './components/Register';
+import Protected from './components/Protected';
+import AddProduct from './components/AddProduct';
+import UpdateProduct from './components/UpdateProduct';
+import ProductList from './components/ProductList';
+import SearchProduct from './components/SearchProduct'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
 

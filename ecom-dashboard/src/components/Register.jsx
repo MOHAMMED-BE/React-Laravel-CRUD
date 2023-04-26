@@ -37,7 +37,6 @@ const Register = (props) => {
       const password = values.password;
       const item = { name, email, password };
       try {
-        // const item = { name, email, password }
         const response = await axios.post(`${props.baseUrl}/api/register`, item);
 
         const data = response.data;
@@ -60,26 +59,6 @@ const Register = (props) => {
     handleBlur,
     handleSubmit,
   } = formik;
-
-
-
-  // const signUp = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const item = { name, email, password }
-  //     const response = await axios.post(`${props.baseUrl}/api/register`, item);
-
-  //     const data = response.data;
-  //     localStorage.setItem('user-info', JSON.stringify(data));
-  //     navigate("/");
-  //     addToast('Account Created Successfully', { appearance: 'success' });
-
-  //   } catch (error) {
-  //     addToast('An error occurred while Register. Please try again later.', { appearance: 'error' });
-
-  //   }
-  // }
 
   return (
     <>

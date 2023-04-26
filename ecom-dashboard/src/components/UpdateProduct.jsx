@@ -7,9 +7,6 @@ import { useFormik } from "formik";
 
 const UpdateProduct = (props) => {
   const { id } = useParams();
-  // const [name, setName] = useState('');
-  // const [price, setPrice] = useState('');
-  // const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [oldimage, setOldImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -39,10 +36,10 @@ const UpdateProduct = (props) => {
     name: yup.string().required("Please Enter Product Name"),
     description: yup.string().required("Please Enter Product Description"),
     price: yup.number()
-    .typeError('Please enter a valid number')
-    .min(1, 'Price should be greater than 0')
-    .required('Please Enter Product Price')
-    .test('no-leading-zero', 'Price cannot start with 0',
+      .typeError('Please enter a valid number')
+      .min(1, 'Price should be greater than 0')
+      .required('Please Enter Product Price')
+      .test('no-leading-zero', 'Price cannot start with 0',
         (value) => value.toString().charAt(0) !== '0'),
   });
 
@@ -55,7 +52,7 @@ const UpdateProduct = (props) => {
       image: null,
     },
     validationSchema: Schema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       const formData = new FormData();
       formData.append('name', values.name);
       formData.append('price', values.price);
@@ -95,22 +92,6 @@ const UpdateProduct = (props) => {
     setImage(oldimage);
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append('name', name);
-  //   formData.append('price', price);
-  //   formData.append('description', description);
-  //   formData.append('image', image);
-
-  //   try {
-  //     await axios.post(`${props.baseUrl}/api/update/${id}`, formData);
-  //     navigate('/');
-  //     addToast('Product updated Successfully', { appearance: 'success' });
-  //   } catch (error) {
-  //     addToast('an error occurred while updating the product. Please try again later.', { appearance: 'error' });
-  //   }
-  // };
 
   return (
     <>
@@ -182,20 +163,20 @@ const UpdateProduct = (props) => {
                 </div>
 
                 <div className='form-group'>
-                  {!imagePreview && <img className='image mt-3' src={'http://127.0.0.1:8000/' + image} key={id} alt={values.name} />}
+                  {!imagePreview && <img className='d-block image mt-3' src={'http://127.0.0.1:8000/' + image} key={id} alt={values.name} />}
                   {imagePreview ?
                     <>
-                      <img src={imagePreview} alt="preview" name='preview' ref={newImageRef} className='image mt-3' />
+                      <img src={imagePreview} alt="preview" name='preview' ref={newImageRef} className='d-block image mt-3' />
                       <button type="submit" onClick={removeImage} className="btn btn-outline-danger ms-2 mt-3">Remove</button>
                     </>
                     :
                     <></>
                   }
-
+                  <label className='form-label'>Product Image</label>
                   <input
                     type='file'
                     accept='image/*'
-                    className='form-control mt-3'
+                    className='form-control'
                     name='image'
                     onChange={onImageChange}
                     ref={imageRef}
