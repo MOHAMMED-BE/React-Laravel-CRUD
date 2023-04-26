@@ -5,14 +5,14 @@ import { useToasts } from 'react-toast-notifications';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-const ProductList = () => {
+const ProductList = (props) => {
     const [data, setData] = useState([]);
     const { addToast } = useToasts();
     const MySwal = withReactContent(Swal);
 
 
     const fetchData = async () => {
-        const response = await axios.get('https://crud-reactlaravel.herokuapp.com/api/showproduct');
+        const response = await axios.get(`${props.baseUrl}/api/showproduct`);
         setData(response.data.product);
     }
 
@@ -33,7 +33,7 @@ const ProductList = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`https://crud-reactlaravel.herokuapp.com/api/delete/${id}`);
+                await axios.delete(`${props.baseUrl}/api/delete/${id}`);
                 fetchData();
                 addToast('Product Deleted Successfully', { appearance: 'success' });
             }
@@ -63,7 +63,7 @@ const ProductList = () => {
                     {data.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td><img className='image' src={'https://crud-reactlaravel.herokuapp.com/' + item.file_path} alt={item.name} /></td>
+                                <td><img className='image' src={`${props.baseUrl}/${item.file_path}`} alt={item.name} /></td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>

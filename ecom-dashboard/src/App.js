@@ -11,6 +11,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
+  let baseUrl = '';
+  let localEnv = true;
+
+  localEnv ? baseUrl = 'http://127.0.0.1:8000' : baseUrl = 'https://crud-reactlaravel.herokuapp.com';
+
   return (
     <div className="App">
       <Router basename="/React-Laravel-CRUD">
@@ -19,37 +24,37 @@ function App() {
 
           <Route path='/login' element={
             <ToastProvider autoDismiss >
-              <Login />
+              <Login baseUrl={baseUrl} />
             </ToastProvider>
           } />
 
           <Route path='/register' element={
             <ToastProvider autoDismiss>
-              <Register />
+              <Register baseUrl={baseUrl}/>
             </ToastProvider>
           } />
 
           <Route path='/add' element={
             <ToastProvider autoDismiss >
-              <Protected Cmp={AddProduct} />
+              <Protected baseUrl={baseUrl} Cmp={AddProduct } />
             </ToastProvider>
           } />
 
           <Route path='/update/:id' element={
             <ToastProvider autoDismiss >
-              <Protected Cmp={UpdateProduct} />
+              <Protected baseUrl={baseUrl} Cmp={UpdateProduct} />
             </ToastProvider>
           } />
 
           <Route path='/search' element={
             <ToastProvider autoDismiss >
-              <Protected Cmp={SearchProduct} />
+              <Protected baseUrl={baseUrl} Cmp={SearchProduct} />
             </ToastProvider>
           } />
 
           <Route path='/' element={
             <ToastProvider autoDismiss >
-              <Protected Cmp={ProductList} />
+              <Protected baseUrl={baseUrl} Cmp={ProductList} />
             </ToastProvider>
           } />
 

@@ -7,13 +7,13 @@ const Protected = (props) => {
 
     useEffect(() => {
         if (!storedData) {
-            navigate('/');
+            navigate('/login');
         }
     }, [navigate, storedData]);
 
     return (
         <>
-            <Cmp />
+            <Cmp baseUrl={props.baseUrl} />
         </>
 
     )

@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { useToasts } from 'react-toast-notifications';
 
-const SearchProduct = () => {
+const SearchProduct = (props) => {
   const [data, setData] = useState([]);
   const [inputValue, setinputValue] = useState(false);
 
   const search = async (key) => {
-    const response = await axios.get(`https://crud-reactlaravel.herokuapp.com/api/search/${key}`);
+    const response = await axios.get(`${props.baseUrl}/api/search/${key}`);
     setData(response.data.product);
     setinputValue(true);
-
   }
-
 
   return (
     <div className='m-1'>
@@ -35,7 +32,7 @@ const SearchProduct = () => {
                 {data.map((item) => {
                   return (
                     <tr key={item.id}>
-                      <td><img className='image' src={'https://crud-reactlaravel.herokuapp.com/' + item.file_path} alt={item.name} /></td>
+                      <td><img className='image' src={'http://127.0.0.1:8000/' + item.file_path} alt={item.name} /></td>
                       <td>{item.name}</td>
                       <td>{item.price}</td>
                       <td>{item.description}</td>

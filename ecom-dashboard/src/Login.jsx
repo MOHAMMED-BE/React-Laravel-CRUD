@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToasts } from 'react-toast-notifications';
 import { Link } from 'react-router-dom';
+import * as yup from "yup";
+import { useFormik } from "formik";
 
-const Login = () => {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+const Login = (props) => {
   const { addToast } = useToasts();
   const navigate = useNavigate();
-  const item = { email, password };
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
@@ -19,42 +16,67 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const axiosLogin = async (e) => {
-    e.preventDefault();
 
-    try {
-      const response = await axios.post('https://crud-reactlaravel.herokuapp.com/api/login', item);
+  const validationSchema = yup.object({
+    email: yup.string().email('Invalid email').required('Please enter an email'),
+    password: yup.string().min(3, 'Must be at least 3 characters').max(20, 'Must be at most 20 characters').required('Password is required'),
+  });
 
-      if (response.status === 200) {
-        const data = response.data;
-        localStorage.setItem('user-info', JSON.stringify(data));
-        navigate('/');
-        addToast('Login Successfully', { appearance: 'success' });
-      } else {
-        addToast('Email or password is incorrect', { appearance: 'warning' });
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const email = values.email;
+      const password = values.password;
+      const item = { email, password };
+      try {
+        const response = await axios.post(`${props.baseUrl}/api/login`, item);
+
+        if (response.status === 200) {
+          const data = response.data;
+          localStorage.setItem('user-info', JSON.stringify(data));
+          navigate('/');
+          addToast('Login Successfully', { appearance: 'success' });
+        } else {
+          addToast('Email or password is incorrect', { appearance: 'warning' });
+        }
+      } catch (error) {
+        addToast('An error occurred while logging in. Please try again later.', { appearance: 'error' });
       }
-    } catch (error) {
-      addToast('An error occurred while logging in. Please try again later.', { appearance: 'error' });
-    }
-  };
+    },
+  });
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (!e.target.value.includes('@')) {
-      setEmailError('Please enter a valid email');
-    } else {
-      setEmailError('');
-    }
-  };
+  const {
+    touched,
+    errors,
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = formik;
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (e.target.value.length < 1) {
-      setPasswordError('Password must be at least 6 characters long');
-    } else {
-      setPasswordError('');
-    }
-  };
+  // const axiosLogin = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post(`${props.baseUrl}/api/login`, item);
+
+  //     if (response.status === 200) {
+  //       const data = response.data;
+  //       localStorage.setItem('user-info', JSON.stringify(data));
+  //       navigate('/');
+  //       addToast('Login Successfully', { appearance: 'success' });
+  //     } else {
+  //       addToast('Email or password is incorrect', { appearance: 'warning' });
+  //     }
+  //   } catch (error) {
+  //     addToast('An error occurred while logging in. Please try again later.', { appearance: 'error' });
+  //   }
+  // };
+
 
   return (
     <>
@@ -62,30 +84,44 @@ const Login = () => {
         <div className="card" style={{ width: '25rem' }}>
           <div className="card-body">
             <h5 className="card-title text-center">Login</h5>
-            <form onSubmit={axiosLogin} method="POST">
+            <form onSubmit={handleSubmit} method="POST">
               <div className="form-group">
                 <input
-                  className={`form-control mb-2 ${emailError ? 'is-invalid' : ''}`}
-                  value={email}
-                  onChange={handleEmailChange}
                   type="email"
                   name="email"
                   placeholder="Email"
                   required
+                  className={
+                    touched.email && errors.email
+                      ? "form-control is-invalid"
+                      : "form-control mb-2"
+                  }
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
                 />
-                {emailError && <div className="invalid-feedback">{emailError}</div>}
+                {touched.email && errors.email ? (
+                  <div className="invalid-feedback">{errors.email}</div>
+                ) : null}
               </div>
               <div className="form-group">
                 <input
-                  className={`form-control mb-2 ${passwordError ? 'is-invalid' : ''}`}
-                  value={password}
-                  onChange={handlePasswordChange}
                   type="password"
                   name="password"
                   placeholder="Password"
                   required
+                  className={
+                    touched.password && errors.password
+                      ? "form-control is-invalid"
+                      : "form-control mb-2"
+                  }
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
                 />
-                {passwordError && <div className="invalid-feedback">{passwordError}</div>}
+                {touched.password && errors.password ? (
+                  <div className="invalid-feedback">{errors.password}</div>
+                ) : null}
               </div>
               <p>
                 Don't have an account?{' '}
